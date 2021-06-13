@@ -1,6 +1,6 @@
 <?php
 
-namespace ahmtbarut\Csrf;
+namespace ahmetbarut\Csrf;
 
 class Csrf
 {
