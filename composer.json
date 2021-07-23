@@ -1,5 +1,6 @@
 {
     "name": "ahmetbarut/csrf",
+    "licanse": "GPL-3",
     "autoload": {
         "psr-4": {
             "ahmetbarut\\Csrf\\": "src/"
