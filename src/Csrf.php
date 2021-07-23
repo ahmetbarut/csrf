@@ -12,11 +12,13 @@ class Csrf
 
     public function __construct()
     {
-        if (session_status() === PHP_SESSION_NONE)
-        {
-            session_status();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
-        $this->generateToken();
+
+        if (empty($_REQUEST)) {
+            $this->generateToken();
+        }
     }
 
     /**
@@ -24,7 +26,7 @@ class Csrf
      */
     public function generateToken()
     {
-        $this->token = $_SESSION["_token"] = md5(time() . rand(0,9999));
+        $this->token = $_SESSION["_token"] = md5(time() . rand(0, 9999));
     }
 
     /**
@@ -34,18 +36,18 @@ class Csrf
      */
     public function tokenHas(array | object $post): bool
     {
-        if (is_array($post))
-        {
+        if (is_array($post)) {
             $post = (object) $post;
         }
-        if ($post)
-        {
-            if ($post->_token === $this->token)
-            {
-                return true;
+        if (isset($post->_token)) {
+            if ($post) {
+                if ($post->_token === $this->getToken()) {
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
+        return false;
     }
 
     /**
@@ -54,7 +56,7 @@ class Csrf
      */
     public function getToken(): string
     {
-        return $this->token;
+        return $_SESSION['_token'];
     }
 
     /**
