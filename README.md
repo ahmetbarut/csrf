@@ -2,7 +2,7 @@
 
 ## Kurulum
 ```shell
-    composer require ahmetbarut\Csrf
+    composer require ahmetbarut\csrf
 ```
 
 ### Basit Kullanım
